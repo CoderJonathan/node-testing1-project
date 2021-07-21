@@ -124,6 +124,9 @@ class Car {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
     // ✨ initialize whatever other properties are needed
+    this.tankSize = tankSize
+    this.mpg = mpg
+    this.name = name
   }
 
   /**
@@ -141,6 +144,16 @@ class Car {
    */
   drive(distance) {
     // ✨ implement
+    if (((this.tank*this.mpg) - distance) >= 0) {
+      this.odometer = this.odometer + distance;
+      this.tank = ((this.tank*this.mpg) - distance)/this.mpg;
+      return this.odometer
+    } else {
+      distance = distance - (this.tank*this.mpg);
+      this.odometer = this.odometer + (this.tank*this.mpg);
+      this.tank = 0;
+      return (`ran out of after ${this.odometer} miles`);
+    }
   }
 
   /**
@@ -156,6 +169,14 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    if(this.tank === this.tankSize) {
+      return this.tank
+    } else if ((this.tankSize - this.tank) < gallons) {
+      this.tank = this.tankSize
+    } else {
+      this.tank += this.tank + gallons
+    }
+    return this.tank
   }
 }
 
@@ -174,6 +195,14 @@ class Car {
  */
 function isEvenNumberAsync(number) {
   // ✨ implement
+  if (!number || typeof number !== "number") {
+    throw new Error(`number must be a number`)
+  }
+  if(number%2 === 0) {
+    return true
+  } else {
+    return false
+  }
 }
 
 module.exports = {
