@@ -8,6 +8,9 @@
  */
 function trimProperties(obj) {
   // ✨ implement
+  const newObj = {...obj}
+  Object.keys(newObj).map(o => newObj[o] = newObj[o].trim())
+  return newObj
 }
 
 /**
@@ -20,6 +23,8 @@ function trimProperties(obj) {
  */
 function trimPropertiesMutation(obj) {
   // ✨ implement
+  Object.keys(obj).forEach(o => {obj[o] = obj[o].trim()})
+  return obj
 }
 
 /**
@@ -32,6 +37,13 @@ function trimPropertiesMutation(obj) {
  */
 function findLargestInteger(integers) {
   // ✨ implement
+  var highest = integers[0]
+  Object.keys(integers).map(int => {
+    if (integers[int].integer > highest.integer) {
+      highest = integers[int]
+    }
+  })
+  return highest.integer
 }
 
 class Counter {
@@ -41,6 +53,7 @@ class Counter {
    */
   constructor(initialNumber) {
     // ✨ initialize whatever properties are needed
+    this.number = initialNumber + 1
   }
 
   /**
@@ -57,6 +70,12 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    if (this.number > 0) {
+      this.number -= 1
+    } else {
+      this.number
+    }
+    return this.number
   }
 }
 
@@ -66,6 +85,8 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasons = ['summer', 'fall', 'winter', 'spring']
+    this.currentSeason = 'spring'
   }
 
   /**
@@ -82,6 +103,13 @@ class Seasons {
    */
   next() {
     // ✨ implement
+    let nextSeason = this.seasons.findIndex(foo => foo === this.currentSeason);
+    
+    this.currentSeason = this.seasons[nextSeason + 1]
+    if(!this.currentSeason) {
+      this.currentSeason = 'summer'
+    }
+    return this.currentSeason
   }
 }
 
